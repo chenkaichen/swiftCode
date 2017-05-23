@@ -1,7 +1,9 @@
 # swiftCode
 swift代码仓库
 
-//图片数组
+
+
+        //图片数组
         let imagesArr = ["second.jpeg","third.jpeg","fourth.jpeg","fifth.jpeg","sixth.jpeg","seventh.jpeg","eighth.jpg"]
         
         //创建轮播视图
@@ -15,7 +17,7 @@ swift代码仓库
         scrollView.isAutoScroll = true
         
         //切换时间间隔（可不设置，默认三秒）
-//        scrollView.autoScrollDeley = 1
+        //scrollView.autoScrollDeley = 1
         
         //点击屏幕中间图片回调
         scrollView.blockWithClick = {(senderCLick : Int) ->() in
