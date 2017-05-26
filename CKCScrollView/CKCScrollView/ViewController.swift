@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         scrollView.isAutoScroll = true
         
         //切换时间间隔（可不设置，默认三秒）
-//        scrollView.autoScrollDeley = 1
+        //scrollView.autoScrollDeley = 1
         
         //点击屏幕中间图片回调
         scrollView.blockWithClick = {(senderCLick : Int) ->() in

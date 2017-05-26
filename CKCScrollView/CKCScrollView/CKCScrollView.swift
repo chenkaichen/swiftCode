@@ -30,31 +30,36 @@ class CKCScrollView: UIView,UIScrollViewDelegate {
     var autoScrollDeley : TimeInterval = 0{
         
         didSet{
-            isAutoScroll = true
             self.removeTimer()
             self.setUpTimer()
             
         }
-    }
-    
-    /// 自动轮播，默认三秒(自动必须要打开)
-    var isAutoScroll : Bool?{
-    
-        didSet{
-            self.removeTimer()
-            self.setUpTimer()
-        
-        }
-    
     }
     
     /// 装图片URL的数组
     var imageArray : [String]? {
         
         didSet{
-            pageControl?.numberOfPages = (imageArray?.count)!
-            self.changeImage(left: imageArray!.count - 1, middle: currentIndex, right: 1)
-            
+            if imageArray?.count == 1 {
+                self.setOnlyImage()
+                scrollImageView?.isScrollEnabled = false
+                
+            }else{
+                pageControl?.numberOfPages = (imageArray?.count)!
+                self.changeImage(left: imageArray!.count - 1, middle: currentIndex, right: 1)
+                
+            }
+        }
+    }
+    
+    /// 自动轮播，默认三秒
+    var isAutoScroll : Bool?{
+        
+        didSet{
+            if isAutoScroll == true && (imageArray?.count)! > 1{
+                autoScrollDeley = 3
+                
+            }
         }
     }
     
@@ -193,6 +198,13 @@ class CKCScrollView: UIView,UIScrollViewDelegate {
         rightImageView?.image = UIImage(named: imageArray![right])
         
         //为了方便计算，显示在屏幕的其实是第二张图片
+        scrollImageView?.setContentOffset(CGPoint(x:(scrollImageView?.width)!,y:0), animated: false)
+        
+    }
+    
+    /// 当图片只有一张时
+    func setOnlyImage(){
+        middleImageView?.image = UIImage(named: imageArray![0])
         scrollImageView?.setContentOffset(CGPoint(x:(scrollImageView?.width)!,y:0), animated: false)
         
     }
